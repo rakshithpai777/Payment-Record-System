@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Financial Summary Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    .table-container {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1000px;
+    }
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .section-title {
+      font-weight: bold;
+      text-align: left;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #333;
+    }
+    td[contenteditable="true"]:focus {
+      outline: 2px solid #007bff;
+      background-color: #fff;
+    }
+    .button-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .btn-save {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-save:hover {
+      background-color: #218838;
+    }
+    .btn-cancel {
+      background-color: #dc3545;
+      color: white;
+    }
+    .btn-cancel:hover {
+      background-color: #c82333;
+    }
+    .btn:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+    }
+    .status-message {
+      text-align: center;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .status-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .status-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+    <div class="section-title">10L</div>
+    <table id="table-10L">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Balance</th>
+          <th>Interest</th>
+          <th>IntPaid</th>
+          <th>Grant</th>
+          <th>Total</th>
+          <th>Expenditure</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td contenteditable="true">2019-20</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">1000000</td><td contenteditable="true">1000000</td><td contenteditable="true">819670</td><td contenteditable="true">180330</td></tr>
+        <tr><td contenteditable="true">2020-21</td><td contenteditable="true">180330</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">180330</td><td contenteditable="true">177950</td><td contenteditable="true">2380</td></tr>
+        <tr><td contenteditable="true">2021-22</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">2380</td></tr>
+        <tr><td contenteditable="true">2022-23</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">2380</td></tr>
+        <tr><td contenteditable="true">2023-24</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">2380</td></tr>
+        <tr><td contenteditable="true">2024-25</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">2380</td><td contenteditable="true">0</td><td contenteditable="true">2380</td></tr>
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="section-title">2L</div>
+    <table id="table-2L">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Balance</th>
+          <th>Interest</th>
+          <th>IntPaid</th>
+          <th>Grant</th>
+          <th>Total</th>
+          <th>Expenditure</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td contenteditable="true">2019-20</td><td contenteditable="true">0</td><td contenteditable="true">24759</td><td contenteditable="true">0</td><td contenteditable="true">200000</td><td contenteditable="true">224759</td><td contenteditable="true">18131</td><td contenteditable="true">206628</td></tr>
+        <tr><td contenteditable="true">2020-21</td><td contenteditable="true">206628</td><td contenteditable="true">8594</td><td contenteditable="true">33632</td><td contenteditable="true">0</td><td contenteditable="true">181590</td><td contenteditable="true">170000</td><td contenteditable="true">11590</td></tr>
+        <tr><td contenteditable="true">2021-22</td><td contenteditable="true">11590</td><td contenteditable="true">851</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">12441</td><td contenteditable="true">0</td><td contenteditable="true">12441</td></tr>
+        <tr><td contenteditable="true">2022-23</td><td contenteditable="true">12441</td><td contenteditable="true">376</td><td contenteditable="true">0</td><td contenteditable="true">400000</td><td contenteditable="true">412817</td><td contenteditable="true">2916</td><td contenteditable="true">409901</td></tr>
+        <tr><td contenteditable="true">2023-24</td><td contenteditable="true">409901</td><td contenteditable="true">8868</td><td contenteditable="true">0</td><td contenteditable="true">0</td><td contenteditable="true">418769</td><td contenteditable="true">232846</td><td contenteditable="true">185923</td></tr>
+        <tr><td contenteditable="true">2024-25</td><td contenteditable="true">185923</td><td contenteditable="true">5060</td><td contenteditable="true">8833</td><td contenteditable="true">0</td><td contenteditable="true">182150</td><td contenteditable="true">7700</td><td contenteditable="true">174450</td></tr>
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td>Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="button-container">
+    <button class="btn btn-save" id="saveBtn">Save Changes</button>
+    <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+  </div>
+
+  <div id="statusMessage" class="status-message" style="display: none;"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tables = document.querySelectorAll("table");
+      const saveBtn = document.getElementById('saveBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const statusMessage = document.getElementById('statusMessage');
+
+      // Store original data for cancel functionality
+      const originalData = new Map();
+      let hasChanges = false;
+
+      // Fetch data from database
+      fetch('fetch_excel_data.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            // Populate 2L table
+            const table2L = document.getElementById('table-2L').querySelector('tbody');
+            table2L.innerHTML = ''; // Clear existing rows
+            data.data_2l.forEach(row => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td contenteditable="true">${row.year}</td>
+                <td contenteditable="true">${row.balance_start}</td>
+                <td contenteditable="true">${row.interest}</td>
+                <td contenteditable="true">${row.int_paid}</td>
+                <td contenteditable="true">${row.grant_amount}</td>
+                <td contenteditable="true">${row.total}</td>
+                <td contenteditable="true">${row.expenditure}</td>
+                <td contenteditable="true">${row.balance_end}</td>
+              `;
+              table2L.appendChild(tr);
+            });
+
+            // Populate 10L table
+            const table10L = document.getElementById('table-10L').querySelector('tbody');
+            table10L.innerHTML = ''; // Clear existing rows
+            data.data_10l.forEach(row => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td contenteditable="true">${row.year}</td>
+                <td contenteditable="true">${row.balance_start}</td>
+                <td contenteditable="true">${row.interest}</td>
+                <td contenteditable="true">${row.int_paid}</td>
+                <td contenteditable="true">${row.grant_amount}</td>
+                <td contenteditable="true">${row.total}</td>
+                <td contenteditable="true">${row.expenditure}</td>
+                <td contenteditable="true">${row.balance_end}</td>
+              `;
+              table10L.appendChild(tr);
+            });
+
+            // Store original data after populating
+            storeOriginalData();
+          } else {
+            showStatus('Error loading data: ' + data.message, 'error');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          showStatus('Error loading data. Please try again.', 'error');
+        });
+
+      // Helper to store original data
+      function storeOriginalData() {
+        tables.forEach((table, tableIndex) => {
+          const tableId = table.id || `table-${tableIndex}`;
+          originalData.set(tableId, []);
+          
+          table.querySelectorAll('tbody tr').forEach(row => {
+            const rowData = [];
+            row.querySelectorAll('td').forEach(cell => {
+              rowData.push(cell.textContent.trim());
+            });
+            originalData.get(tableId).push(rowData);
+          });
+        });
+      }
+
+      // Helper to show status messages
+      function showStatus(message, type) {
+        statusMessage.textContent = message;
+        statusMessage.className = `status-message status-${type}`;
+        statusMessage.style.display = 'block';
+        setTimeout(() => {
+          statusMessage.style.display = 'none';
+        }, 3000);
+      }
+
+      // Helper to convert column index to Excel-like letter (0-indexed)
+      const columnToLetter = (colIndex) => {
+        let letter = '';
+        let temp = colIndex;
+        while (temp >= 0) {
+          letter = String.fromCharCode(65 + (temp % 26)) + letter;
+          temp = Math.floor(temp / 26) - 1;
+        }
+        return letter;
+      };
+
+      // Helper to convert Excel-like letter to column index (0-indexed)
+      const letterToColumn = (letter) => {
+        let colIndex = 0;
+        for (let i = 0; i < letter.length; i++) {
+          colIndex = colIndex * 26 + (letter.charCodeAt(i) - 65 + 1);
+        }
+        return colIndex - 1; // Adjust to 0-indexed
+      };
+
+      // Global object to store cell data (value and formula)
+      const cellData = new Map(); // Map<tableId, Map<cellReference, {value, formula}>>
+
+      tables.forEach((table, tableIndex) => {
+        // Assign a unique ID to each table for cellData mapping
+        const tableId = table.id || `table-${tableIndex}`;
+        cellData.set(tableId, new Map());
+        originalData.set(tableId, []);
+
+        const tbody = table.querySelector("tbody");
+        const tfootCells = table.querySelectorAll("tfoot .total-row td");
+
+        // Store original data and make cells editable
+        tbody.querySelectorAll("tr").forEach((row, rowIndex) => {
+          const rowData = [];
+          row.querySelectorAll("td").forEach((cell, cellIndex) => {
+            const numCols = table.rows[0].cells.length;
+            const colIndex = cellIndex % numCols;
+            
+            // Store original value
+            rowData.push(cell.textContent.trim());
+            
+            // Make all cells editable
+            cell.contentEditable = "true";
+            const cellReference = `${columnToLetter(colIndex)}${rowIndex + 1}`;
+            cell.setAttribute('data-cell-reference', cellReference);
+
+            // Store initial value
+            const initialValue = parseFloat(cell.textContent || '0');
+            cellData.get(tableId).set(cellReference, { value: initialValue, formula: null });
+
+            // Add event listener for cell changes
+            cell.addEventListener('input', () => {
+              const input = cell.textContent.trim();
+              if (input.startsWith('=')) {
+                // Handle formula
+                cellData.get(tableId).get(cellReference).formula = input;
+                const result = evaluateFormula(input, tableId);
+                cellData.get(tableId).get(cellReference).value = result;
+                cell.textContent = result;
+              } else {
+                // Handle direct value
+                const value = parseFloat(input) || 0;
+                cellData.get(tableId).get(cellReference).value = value;
+                cellData.get(tableId).get(cellReference).formula = null;
+              }
+              updateSums();
+              markAsChanged();
+            });
+          });
+          originalData.get(tableId).push(rowData);
+        });
+
+        // Function to get the numerical value of a cell based on its reference
+        const getCellValue = (ref, currentTableId) => {
+          const tableMap = cellData.get(currentTableId);
+          if (tableMap && tableMap.has(ref)) {
+            return tableMap.get(ref).value;
+          }
+          return 0; // Default to 0 if cell not found or no value
+        };
+
+        // Function to evaluate a formula
+        const evaluateFormula = (formula, currentTableId) => {
+          // Remove the leading '='
+          let expression = formula.substring(1);
+
+          // Replace cell references (e.g., A1, B2) with their actual values
+          expression = expression.replace(/[A-Z]+[0-9]+/g, (match) => {
+            const value = getCellValue(match, currentTableId);
+            return value;
+          });
+
+          try {
+            // Use Function constructor for safe evaluation of simple arithmetic
+            const result = new Function(return ${expression})();
+            return isNaN(result) ? 0 : result;
+          } catch (e) {
+            console.error("Formula evaluation error:", e);
+            return '#ERROR!';
+          }
+        };
+
+        // Function to calculate and update column sums
+        const updateSums = () => {
+          const numCols = table.rows[0].cells.length;
+          for (let colIndex = 1; colIndex < numCols; colIndex++) {
+            let sum = 0;
+            tbody.querySelectorAll(tr).forEach(row => {
+              const cell = row.children[colIndex];
+              if (cell && cell.contentEditable === "true") {
+                const cellRef = cell.getAttribute('data-cell-reference');
+                const cellObj = cellData.get(tableId).get(cellRef);
+                if (cellObj) {
+                  sum += cellObj.value;
+                }
+              }
+            });
+            if (tfootCells[colIndex]) {
+              tfootCells[colIndex].textContent = sum.toFixed(0);
+            }
+          }
+        };
+
+        // Initial calculation of sums
+        updateSums();
+      });
+
+      // Function to mark that changes have been made
+      function markAsChanged() {
+        hasChanges = true;
+        saveBtn.disabled = false;
+        cancelBtn.disabled = false;
+      }
+
+      // Save button functionality
+      saveBtn.addEventListener('click', async () => {
+        if (!hasChanges) {
+          showStatus('No changes to save', 'error');
+          return;
+        }
+
+        try {
+          saveBtn.disabled = true;
+          cancelBtn.disabled = true;
+
+          // Collect data from both tables
+          const data = {
+            data_2l: [],
+            data_10l: []
+          };
+
+          // Get 2L table data
+          const table2L = document.getElementById('table-2L');
+          table2L.querySelectorAll('tbody tr').forEach(row => {
+            const cells = row.querySelectorAll('td');
+            data.data_2l.push({
+              year: cells[0].textContent.trim(),
+              balance_start: parseFloat(cells[1].textContent) || 0,
+              interest: parseFloat(cells[2].textContent) || 0,
+              int_paid: parseFloat(cells[3].textContent) || 0,
+              grant_amount: parseFloat(cells[4].textContent) || 0,
+              total: parseFloat(cells[5].textContent) || 0,
+              expenditure: parseFloat(cells[6].textContent) || 0,
+              balance_end: parseFloat(cells[7].textContent) || 0
+            });
+          });
+
+          // Get 10L table data
+          const table10L = document.getElementById('table-10L');
+          table10L.querySelectorAll('tbody tr').forEach(row => {
+            const cells = row.querySelectorAll('td');
+            data.data_10l.push({
+              year: cells[0].textContent.trim(),
+              balance_start: parseFloat(cells[1].textContent) || 0,
+              interest: parseFloat(cells[2].textContent) || 0,
+              int_paid: parseFloat(cells[3].textContent) || 0,
+              grant_amount: parseFloat(cells[4].textContent) || 0,
+              total: parseFloat(cells[5].textContent) || 0,
+              expenditure: parseFloat(cells[6].textContent) || 0,
+              balance_end: parseFloat(cells[7].textContent) || 0
+            });
+          });
+
+          // Send data to server
+          const response = await fetch('save_excel_data.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          });
+
+          const result = await response.json();
+          
+          if (result.status === 'success') {
+            showStatus('Data saved successfully!', 'success');
+            hasChanges = false;
+            // Update original data after successful save
+            storeOriginalData();
+          } else {
+            showStatus('Error saving data: ' + result.message, 'error');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          showStatus('Error saving data: ' + error.message, 'error');
+        } finally {
+          saveBtn.disabled = false;
+          cancelBtn.disabled = false;
+        }
+      });
+
+      // Cancel button functionality
+      cancelBtn.addEventListener('click', () => {
+        if (!hasChanges) {
+          showStatus('No changes to cancel', 'error');
+          return;
+        }
+
+        if (confirm('Are you sure you want to cancel all changes?')) {
+          tables.forEach(table => {
+            const tableId = table.id;
+            const originalTableData = originalData.get(tableId);
+            
+            table.querySelectorAll('tbody tr').forEach((row, rowIndex) => {
+              row.querySelectorAll('td').forEach((cell, cellIndex) => {
+                if (originalTableData[rowIndex] && originalTableData[rowIndex][cellIndex]) {
+                  cell.textContent = originalTableData[rowIndex][cellIndex];
+                  
+                  // Update cellData
+                  const cellRef = cell.getAttribute('data-cell-reference');
+                  if (cellRef) {
+                    const value = parseFloat(cell.textContent) || 0;
+                    cellData.get(tableId).set(cellRef, { value: value, formula: null });
+                  }
+                }
+              });
+            });
+            
+            // Update sums
+            const tfootCells = table.querySelectorAll("tfoot .total-row td");
+            const tbody = table.querySelector("tbody");
+            const numCols = table.rows[0].cells.length;
+            
+            for (let colIndex = 1; colIndex < numCols; colIndex++) {
+              let sum = 0;
+              tbody.querySelectorAll(tr).forEach(row => {
+                const cell = row.children[colIndex];
+                if (cell && cell.contentEditable === "true") {
+                  const cellRef = cell.getAttribute('data-cell-reference');
+                  const cellObj = cellData.get(tableId).get(cellRef);
+                  if (cellObj) {
+                    sum += cellObj.value;
+                  }
+                }
+              });
+              if (tfootCells[colIndex]) {
+                tfootCells[colIndex].textContent = sum.toFixed(0);
+              }
+            }
+          });
+          
+          hasChanges = false;
+          saveBtn.disabled = true;
+          cancelBtn.disabled = true;
+          showStatus('Changes cancelled', 'error');
+        }
+      });
+
+      // Initially disable buttons
+      saveBtn.disabled = true;
+      cancelBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>

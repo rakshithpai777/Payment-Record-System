@@ -1,0 +1,8 @@
+
+---
+2025-06-18 07:00:35 - Received JSON Input: {"table_type":"non_recurring","data":[{"year":2019,"balance":0,"interest":0,"int_paid":0,"grant":0,"total":0,"expenditure":511500,"new_balance":-511500},{"year":2020,"balance":-511500,"interest":0,"int_paid":0,"grant":0,"total":-511500,"expenditure":486120,"new_balance":-997620}]}
+2025-06-18 07:00:35 - Table Type: non_recurring
+2025-06-18 07:00:35 - Data to process: [{"year":2019,"balance":0,"interest":0,"int_paid":0,"grant":0,"total":0,"expenditure":511500,"new_balance":-511500},{"year":2020,"balance":-511500,"interest":0,"int_paid":0,"grant":0,"total":-511500,"expenditure":486120,"new_balance":-997620}]
+2025-06-18 07:00:35 - Database Error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'grant = ?, 
+                    total = ?, 
+                    expenditure...' at line 5

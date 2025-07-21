@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add/Edit Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for modal effect */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .modal-container {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input[type="date"] {
+        padding-right: 30px; /* Make space for calendar icon */
+    }
+
+    textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+
+    .file-input-wrapper {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .file-input-wrapper input[type="file"] {
+      display: none; /* Hide default file input */
+    }
+
+    .file-input-wrapper label {
+      background-color: #e0e0e0;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+
+    .file-input-wrapper span {
+      padding: 0 10px;
+      color: #777;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .button-group button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .button-group .save-button {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .button-group .cancel-button {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .recurring-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .type-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .toggle-button {
+      padding: 8px 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .toggle-button.active {
+      background-color: #007bff;
+      color: white;
+      border-color: #0056b3;
+    }
+
+    .button-group .record-button {
+      background-color: #17a2b8;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .button-group .record-button:hover {
+      background-color: #138496;
+    }
+  </style>
+</head>
+<body>
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>Add/Edit Payment</h2>
+      <button class="close-button">&times;</button>
+    </div>
+    <form id="paymentForm" enctype="multipart/form-data" action="process_payments.php" method="POST">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" name="category" required>
+        </div>
+        <div class="form-group">
+          <label>Recurring Type</label>
+          <div class="recurring-toggle">
+            <button type="button" class="toggle-button" data-value="Non-Recurring">Non-Recurring</button>
+            <button type="button" class="toggle-button" data-value="Recurring">Recurring</button>
+          </div>
+          <input type="hidden" name="recurring_type" id="recurring_type" value="Non-Recurring">
+        </div>
+        <div class="form-group">
+          <label>Slab</label>
+          <input type="text" name="slab" required>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="number" name="amount" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label>Vendor</label>
+          <input type="text" name="vendor" required>
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <div class="type-toggle">
+            <button type="button" class="toggle-button" data-value="Credit">Credit</button>
+            <button type="button" class="toggle-button" data-value="Debit">Debit</button>
+            <button type="button" class="toggle-button" data-value="Interest">Interest</button>
+            <button type="button" class="toggle-button" data-value="Charges">Charges</button>
+          </div>
+          <input type="hidden" name="type" id="type" value="Credit">
+        </div>
+        <div class="form-group">
+          <label>Reference No</label>
+          <input type="text" name="reference_no" required>
+        </div>
+        <div class="form-group">
+          <label>Balance</label>
+          <input type="number" name="balance" step="0.01" required>
+        </div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Comment</label>
+          <textarea name="comment"></textarea>
+        </div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label>File</label>
+          <div class="file-input-wrapper">
+            <label for="fileUpload">Choose File</label>
+            <input type="file" id="fileUpload" name="payment_file">
+            <span id="fileName">No file chosen</span>
+          </div>
+        </div>
+      </div>
+      <div class="button-group">
+        <a href="view_payments.php" class="record-button">View Records</a>
+        <button type="submit" class="save-button">Save</button>
+        <button type="button" class="cancel-button">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('fileUpload').addEventListener('change', function() {
+      const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+      document.getElementById('fileName').textContent = fileName;
+    });
+
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      
+      // Show loading state
+      const submitButton = this.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Saving...';
+      submitButton.disabled = true;
+      
+      fetch('process_payments.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        console.log('Response status:', response.status);
+        return response.json();
+      })
+      .then(data => {
+        console.log('Response data:', data);
+        if(data.status === 'success') {
+          alert('Payment record added successfully!');
+          window.location.href = 'view_payments.php';
+        } else {
+          alert('Error: ' + data.message);
+          if (data.debug_info) {
+            console.log('Debug info:', data.debug_info);
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while saving the payment record. Please try again.');
+      })
+      .finally(() => {
+        // Reset button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      });
+    });
+
+    document.querySelector('.cancel-button').addEventListener('click', function() {
+      window.location.href = 'atl.html';
+    });
+
+    document.querySelector('.close-button').addEventListener('click', function() {
+      window.location.href = 'atl.html';
+    });
+
+    // Handle recurring type toggle
+    const toggleButtons = document.querySelectorAll('.recurring-toggle .toggle-button');
+    const recurringTypeInput = document.getElementById('recurring_type');
+
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons in the same group
+        this.parentElement.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        // Update hidden input value
+        recurringTypeInput.value = this.dataset.value;
+      });
+    });
+
+    // Handle type toggle
+    const typeButtons = document.querySelectorAll('.type-toggle .toggle-button');
+    const typeInput = document.getElementById('type');
+
+    typeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons in the same group
+        this.parentElement.querySelectorAll('.toggle-button').forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        this.classList.add('active');
+        // Update hidden input value
+        typeInput.value = this.dataset.value;
+      });
+    });
+
+    // Set initial active states
+    document.querySelector('.recurring-toggle .toggle-button[data-value="Non-Recurring"]').classList.add('active');
+    document.querySelector('.type-toggle .toggle-button[data-value="Credit"]').classList.add('active');
+  </script>
+</body>
+</html>
