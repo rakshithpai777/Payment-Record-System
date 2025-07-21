@@ -52,6 +52,7 @@ $conn = mysqli_connect("localhost", "root", "", "payment_db");
 Run the Project
 Open your browser and navigate to:
 http://localhost/PaymentRecordSystem/
+(Note: atl.html is the main page of this project.)
 
 🎯 Purpose:
 Created as part of a learning project to enhance full-stack web development skills and understand PHP-MySQL integration using XAMPP.
